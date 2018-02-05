@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-import os
-import glob
-import shutil
-import sys
+# modules that are needed
+import os #creating, opening, reading files, directories, folders
+import glob # finds all the pathnames matching a specified pattern according to the rules used by the Unix shell
+import shutil # high-level operations on files and collections of files, file copying and removal
+import sys # provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter
 
 #--------------------------------------------------------------------------------
 
@@ -17,6 +18,7 @@ mniAtlasDir = '/projects/lliu/ImportantFiles/'
 eyeFile = tempSubjName + '.bedpostX/xfms/eye.mat'
 
 # output directories
+# do I need to make sure that these are all already created?
 bedpostXPipeDir = '/scratch/lliu/' + projectName + '/pipelines/bedpostX/' + subjectID + '/'
 conmatPipeDir = '/scratch/lliu/' + projectName + '/pipelines/conmat/' + subjectID + '/'
 tempSubjDir = '/scratch/lliu/tmp/' + subjectID + '/'
@@ -101,6 +103,7 @@ def copyBedpostX():
 
 def register():
 	# registers all necessary brain volumes, scalar files, and masks to the same voxel space
+	# uses FSL's flirt
 	os.chdir(tempSubjDir)
 
 	b0Mask = glob.glob('*_b0_bet_mask.nii.gz')[0]
@@ -167,7 +170,7 @@ def runConmat():
 	os.chdir(tempSubjDir)
 	if not os.path.exists(conmatPipeDir):
 		os.makedirs(conmatPipeDir)
-
+# running bedpostX
 	if os.listdir(conmatPipeDir)==[]:
 		register()
 		os.system('echo "streamlining"')
@@ -197,6 +200,7 @@ def runConmat():
 
 		shutil.copyfile(tempSubjDir + glob.glob('bedDetTracts.Bfloat')[0], conmatPipeDir + subjectID + '_detTracts.Bfloat')
 		shutil.copyfile(tempSubjDir + glob.glob('*.scheme')[0], conmatPipeDir + subjectID + '.scheme')
+		# Using the Shen atlas
 		shutil.copyfile(tempSubjDir + glob.glob('atlas.nii.gz')[0], conmatPipeDir + subjectID + '_registered_shen.nii.gz')
 		shutil.copyfile(tempSubjDir + glob.glob(conExt)[0], conmatPipeDir + subjectID + '_bedpostX_det_connectivity.csv')
 		shutil.copyfile(tempSubjDir + glob.glob(lenExt)[0], conmatPipeDir + subjectID + '_bedpostX_det_length.csv')

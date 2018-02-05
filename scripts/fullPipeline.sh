@@ -14,6 +14,8 @@ projectName=SPINS
 projectDir=/scratch/lliu/${projectName}/
 projDirName=/scratch/lliu/${projectName}
 
+## Calling a scrip to pull all the connectivity matrices and put them into one folder
+# and into a text file
 parameters=( connectivity fa_mean length md_mean )
 status=( control_arm_1 case_arm_2 )
 #-------------------------------------------------------------------------------
@@ -98,6 +100,7 @@ mkdir ${projectDir}/analysis/tables
 
 #-------------------------------------------------------------------------------
 
+# Uses matlab to run getFigs.m and getTables.m in matlab
 matlab -nodisplay -nosplash -r "addpath(genpath('/projects/lliu/conmat/scripts')); '/projects/lliu/conmat/scripts/getPlots.m'; quit"
 matlab -nodisplay -nosplash -r "addpath(genpath('/projects/lliu/conmat/scripts')); '/projects/lliu/conmat/scripts/getTables.m'; quit"
 cp -r /scratch/lliu/${projectName}/analysis/figures/. /scratch/lliu/${projectName}/analysis

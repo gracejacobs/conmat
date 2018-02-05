@@ -1,6 +1,6 @@
 #!/bin/bash -e
 . $MODULESHOME/init/bash
-module load camino/1886d5
+module load camino/1886d5 # runs camino
 module load FSL/5.0.10
 module load python
 module load AFNI
@@ -14,6 +14,7 @@ projectName=SPINS
 projectPath=/archive/data-2.0/${projectName}/data/nii/
 projectDir=/scratch/lliu/${projectName}/
 
+# creating directories for bedpostx output and camino connectivity matrices outputs
 if [ ! -d "${projectDir}" ]
 	then
 	cd /scratch/lliu/ | mkdir ${projectDir}
@@ -25,6 +26,8 @@ fi
 
 cd ${projectPath}
 
+
+# submitting to the q for each subject run the runthis.sh script
 for subjectID in *
 do
 	tempSubjDir=/scratch/lliu/tmp/${subjectID}/

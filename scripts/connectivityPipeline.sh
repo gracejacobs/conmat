@@ -24,6 +24,8 @@ if [ ! -d "${projectDir}" ]
 	mkdir conmat
 fi
 
+## creates file for each subject: /scratch/lliu/SPINS/bedpostX
+
 cd ${projectPath}
 
 

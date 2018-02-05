@@ -20,6 +20,7 @@ eyeFile = tempSubjName + '.bedpostX/xfms/eye.mat'
 # output directories
 # do I need to make sure that these are all already created?
 bedpostXPipeDir = '/scratch/lliu/' + projectName + '/pipelines/bedpostX/' + subjectID + '/'
+#/scratch/lliu/SPINS/pipelines/bedpostX/ID
 conmatPipeDir = '/scratch/lliu/' + projectName + '/pipelines/conmat/' + subjectID + '/'
 tempSubjDir = '/scratch/lliu/tmp/' + subjectID + '/'
 tempSubjName = '/scratch/lliu/tmp/' + subjectID
